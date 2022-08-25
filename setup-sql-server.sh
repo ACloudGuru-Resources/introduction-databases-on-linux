@@ -11,3 +11,8 @@ if ! test -f "/home/cloud_user/database_passwd.txt"; then
     /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P $MSSQL_SA_PASSWORD -d demo -i demo.sql
     rm demo.sql
 fi
+
+if ! $(systemctl is-active --quiet mssql-server)
+then
+  systemctl start mssql-server
+fi
