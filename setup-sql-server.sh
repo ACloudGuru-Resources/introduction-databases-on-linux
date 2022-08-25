@@ -1,6 +1,7 @@
 #!/bin/bash
 
-if ! test -f "/home/cloud_user/database_passwd.txt"; then
+if ! test -f "/home/cloud_user/bin/setup_complete.txt"; then
+    touch /home/cloud_user/bin/setup_complete.txt
     systemctl stop mssql-server
     export MSSQL_SA_PASSWORD=$(date +%s | sha256sum | base64 | head -c 32)
     echo $MSSQL_SA_PASSWORD > /home/cloud_user/database_passwd.txt
